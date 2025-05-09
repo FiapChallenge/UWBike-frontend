@@ -1,6 +1,8 @@
 import { View, Pressable, Text } from "react-native";
 import { Feather} from  '@expo/vector-icons';
 
+import { router } from 'expo-router';
+
 export function Header(){
     return(
         <View className="w-full flex-row items-center justify-between">
@@ -16,7 +18,7 @@ export function Header(){
                 </View>
             </View>
 
-            <Pressable>
+            <Pressable onPress={() => router.push("/notifications")}>
                 <Feather name="bell" size={24} color="white" />
             </Pressable>
         </View>
