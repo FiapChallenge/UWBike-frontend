@@ -8,16 +8,12 @@ export default function Notifications() {
   return (
     <SafeAreaView className="flex-1 bg-zinc-900">
         <View className="w-full mt-4 px-4">
-            <View className="flex-row items-center justify-between">
-                <Pressable onPress={() => router.back()}>
+            <View className="flex-row items-center justify-center">
+                <Pressable onPress={() => router.back()} className="absolute left-0">
                     <Feather name="arrow-left" size={24} color="white" />
                 </Pressable>
 
                 <Text className="text-white font-bold text-xl">Notificações</Text>
-
-                <Pressable>
-                    <Feather name="settings" size={24} color="white" />
-                </Pressable>
             </View>
 
             <Notificationlist />
