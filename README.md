@@ -1,50 +1,38 @@
-# Welcome to your Expo app 👋
+# 📱 Controle de Pátio - Mottu
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<img src="assets/images/readme-picture.jpg" alt="Readme Image">
 
-## Get started
 
-1. Install dependencies
+## Sobre o Projeto
+Este é um aplicativo mobile desenvolvido para auxiliar os funcionários da Mottu na **gestão e localização de motos dentro dos pátios de estacionamento**, garantindo **eficiência operacional e rastreabilidade** dos veículos, minimizando erros humanos, reduzindo o tempo de localização das motos e organizando melhor o espaço físico dos pátios.
 
-   ```bash
-   npm install
-   ```
 
-2. Start the app
+## 🧱 Tecnologias Utilizadas
 
-   ```bash
-   npx expo start
-   ```
+- **React Native** com Expo
+- **AsyncStorage** para persistência local de dados
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Instalando dependências
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Para instalar as dependências do projeto siga estas etapas:
 
-## Get a fresh project
+- Baixe o repositório
+- Abra o terminal e digite o comando:
 
-When you're ready, run:
-
-```bash
-npm run reset-project
+``` bash
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## ☕ Executando o projeto
 
-## Learn more
+Para executar o projeto, siga estas etapas:
 
-To learn more about developing your project with Expo, look at the following resources:
+``` bash
+npx expo start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+> Caso possua o Android Studio instalado e configurado em sua máquina, basta digitar `a` no terminal para abrir um dispositivo Android.
+> 
+> Caso não possua, instale o Expo Go em seu smartphone e escaneie o QR Code gerado no terminal que será exibido em seu smartphone (necessário que o PC e Smartphone estejam na mesma rede).
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
