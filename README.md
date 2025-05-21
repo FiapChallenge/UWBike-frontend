@@ -46,7 +46,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="https://github.com/edvxndxvi">
         <img src="https://avatars.githubusercontent.com/u/109118071?v=4" width="100px;"/><br>
         <sub>
-          <b>Edvan Davi</b>
+          <b>Edvan Davi - RM554733 - 2TDSPZ</b>
         </sub>
       </a>
     </td>
@@ -54,7 +54,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="https://github.com/rafaelromanini">
         <img src="https://avatars.githubusercontent.com/u/162237423?v=4" width="100px;"/><br>
         <sub>
-          <b>Rafael Romanini</b>
+          <b>Rafael Romanini - RM554637 - 2TDSPZ</b>
         </sub>
       </a>
     </td>
@@ -62,7 +62,7 @@ Agradecemos às seguintes pessoas que contribuíram para este projeto:
       <a href="https://github.com/ViniciusLABernardes">
         <img src="https://avatars.githubusercontent.com/u/111243990?v=4" width="100px;"/><br>
         <sub>
-          <b>Vinicius Leandro</b>
+          <b>Vinicius Leandro - RM554728 - 2TDSPY</b>
         </sub>
       </a>
     </td>
