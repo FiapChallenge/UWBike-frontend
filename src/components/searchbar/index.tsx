@@ -8,7 +8,7 @@ type Props = {
 
 export function SearchBar({ searchTerm, onSearch }: Props) {
   return (
-    <View className='w-full flex-row gap-4 bg-zinc-800 p-4 rounded-lg items-center'>
+    <View className='w-full flex-row gap-2 bg-zinc-800 p-4 rounded-lg items-center'>
       <Feather name="search" size={18} color="#8e8e8e" />
       <TextInput
         placeholder='Pesquisar por placa ou chassi'
