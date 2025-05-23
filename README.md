@@ -6,6 +6,7 @@
 ## Sobre o Projeto
 Este é um aplicativo mobile desenvolvido para auxiliar os funcionários da Mottu na **gestão e localização de motos dentro dos pátios de estacionamento**, garantindo **eficiência operacional e rastreabilidade** dos veículos, minimizando erros humanos, reduzindo o tempo de localização das motos e organizando melhor o espaço físico dos pátios.
 
+**Link Figma:** https://www.figma.com/design/NUqU4fDAQuui4KsTPew7aa/Mottu?node-id=0-1&t=BPz6mwmRgUJmT9k8-1
 
 ## 🧱 Tecnologias Utilizadas
 
