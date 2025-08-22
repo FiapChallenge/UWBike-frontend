@@ -1,4 +1,4 @@
-import { View, Pressable, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { Feather} from  '@expo/vector-icons';
 
 import { router } from 'expo-router';
@@ -18,9 +18,9 @@ export function Header(){
                 </View>
             </View>
 
-            <Pressable onPress={() => router.push("/notifications")}>
+            <TouchableOpacity onPress={() => router.push("/notifications")}>
                 <Feather name="bell" size={24} color="white" />
-            </Pressable>
+            </TouchableOpacity>
         </View>
     );
 }
