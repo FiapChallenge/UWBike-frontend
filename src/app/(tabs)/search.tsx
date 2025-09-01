@@ -1,4 +1,5 @@
 import { SearchBar } from "@/src/components/searchbar";
+import { useTheme } from "@/src/context/ThemeProvider";
 import { useState } from "react";
 import { View, Text, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -10,6 +11,7 @@ const motosMock = [
 ];
 
 export default function Search() {
+  const { colors } = useTheme();
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredMotos = motosMock.filter(
@@ -21,7 +23,7 @@ export default function Search() {
   const showResults = searchTerm.trim().length > 0 && filteredMotos.length > 0;
 
   return (
-    <SafeAreaView className="flex-1 bg-zinc-900">
+    <SafeAreaView className={`flex-1 ${colors.bg}`}>
       <View className="w-full mt- px-4 mt-4">
         <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
       </View>
@@ -32,9 +34,9 @@ export default function Search() {
             data={filteredMotos}
             keyExtractor={(item) => item.chassi}
             renderItem={({ item }) => (
-              <View className="bg-zinc-800 p-4 rounded-md mb-2">
-                <Text className="text-white">Placa: {item.placa}</Text>
-                <Text className="text-zinc-400">Chassi: {item.chassi}</Text>
+              <View className={`${colors.card} p-4 rounded-md mb-2`}>
+                <Text className={`${colors.text}`}>Placa: {item.placa}</Text>
+                <Text className="text-zinc-500">Chassi: {item.chassi}</Text>
               </View>
             )}
           />
