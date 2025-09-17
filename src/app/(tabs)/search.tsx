@@ -1,14 +1,20 @@
-import { SearchBar } from "@/src/components/searchbar";
+import SearchBar from "@/src/components/searchBar";
 import { useTheme } from "@/src/context/ThemeProvider";
 import { useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const motosMock = [
-  { placa: "ABC1234", chassi: "9C2KC0810DR123456" },
-  { placa: "XYZ5678", chassi: "9C2KC0810DR654321" },
-  { placa: "DEF9999", chassi: "9C2KC0810DR000999" },
+  { placa: "ABC1234", chassi: "9C2KC0810DR123456", tipo: 'sport' },
+  { placa: "XYZ5678", chassi: "9C2KC0810DR654321", tipo: 'e'},
+  { placa: "DEF9999", chassi: "9C2KC0810DR000999", tipo: 'pop' },
 ];
+
+const motoImages: Record<string, any> = {
+  sport: require("../../../assets/images/mottusport.png"),
+  e: require("../../../assets/images/mottue.png"),
+  pop: require("../../../assets/images/mottupop.png"),
+}
 
 export default function Search() {
   const { colors } = useTheme();
@@ -34,9 +40,16 @@ export default function Search() {
             data={filteredMotos}
             keyExtractor={(item) => item.chassi}
             renderItem={({ item }) => (
-              <View className={`${colors.card} p-4 rounded-md mb-2`}>
-                <Text className={`${colors.text}`}>Placa: {item.placa}</Text>
-                <Text className="text-zinc-500">Chassi: {item.chassi}</Text>
+              <View className={`${colors.card} p-4 rounded-md mb-2 flex-row items-center`}>
+                <Image
+                  source={motoImages[item.tipo]}
+                  style={{ width: 60, height: 60, marginRight: 12, borderRadius: 8 }}
+                  resizeMode="contain"
+                />
+                <View>
+                  <Text className={`${colors.text}`}>Placa: {item.placa}</Text>
+                  <Text className="text-zinc-500">Chassi: {item.chassi}</Text>
+                </View>
               </View>
             )}
           />

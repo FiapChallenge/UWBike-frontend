@@ -4,7 +4,7 @@ import { Feather} from  '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useTheme } from "@/src/context/ThemeProvider";
 
-export function Header(){
+export default function Header(){
     const {colors} = useTheme();
 
     return(

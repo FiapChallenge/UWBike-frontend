@@ -7,7 +7,7 @@ type Props = {
   onSearch: (text: string) => void;
 };
 
-export function SearchBar({ searchTerm, onSearch }: Props) {
+export default function SearchBar({ searchTerm, onSearch }: Props) {
   const { colors } = useTheme();
 
   return (
@@ -16,7 +16,7 @@ export function SearchBar({ searchTerm, onSearch }: Props) {
       <TextInput
         placeholder='Pesquisar por placa ou chassi'
         placeholderTextColor='#8e8e8e'
-        className={`flex-1 {$colors.text}`}
+        className={`flex-1 ${colors.text}`}
         value={searchTerm}
         onChangeText={onSearch}
       />
