@@ -34,7 +34,6 @@ const notificationsData = [
 const FILTER_KEY = "@notifications_filter";
 
 export function Notificationlist() {
-  const { colors } = useTheme();
   const [filter, setFilter] = useState<"all" | "alert" | "info">("all");
 
   // Carregar filtro salvo
@@ -68,11 +67,11 @@ export function Notificationlist() {
         <TouchableOpacity
           onPress={() => setFilter("all")}
           className={`px-4 py-2 rounded-full ${
-            filter === "all" ? "bg-[#00B030]" : `${colors.card}`
+            filter === "all" ? "bg-[#00B030]" : 'bg-card border-border border'
           }`}
         >
           <Text
-            className={`${filter === "all" ? "text-white" : `${colors.text}`}`}
+            className={`${filter === "all" ? "text-white" : 'text-text'}`}
           >
             Todos
           </Text>
@@ -80,11 +79,11 @@ export function Notificationlist() {
         <TouchableOpacity
           onPress={() => setFilter("info")}
           className={`px-4 py-2 rounded-full ${
-            filter === "info" ? "bg-[#00B030]" : `${colors.card}`
+            filter === "info" ? "bg-[#00B030]" : 'bg-card border-border border'
           }`}
         >
           <Text
-            className={`${filter === "info" ? "text-white" : `${colors.text}`}`}
+            className={`${filter === "info" ? "text-white" : 'text-text'}`}
           >
             Informações
           </Text>
@@ -92,12 +91,12 @@ export function Notificationlist() {
         <TouchableOpacity
           onPress={() => setFilter("alert")}
           className={`px-4 py-2 rounded-full ${
-            filter === "alert" ? "bg-[#00B030]" : `${colors.card}`
+            filter === "alert" ? "bg-[#00B030]" : 'bg-card border-border border'
           }`}
         >
           <Text
             className={`${
-              filter === "alert" ? "text-white" : `${colors.text}`
+              filter === "alert" ? "text-white" : 'text-text'
             }`}
           >
             Alertas
@@ -117,7 +116,7 @@ export function Notificationlist() {
           />
         )}
         ListEmptyComponent={
-          <Text className="text-center text-zinc-500 mt-8">
+          <Text className="text-center text-secondary mt-8">
             Nenhuma notificação encontrada.
           </Text>
         }
@@ -127,17 +126,19 @@ export function Notificationlist() {
 }
 
 export  function NotificationItem(props: any) {
-  const {colors} = useTheme();
+  const { theme } = useTheme();
+  const iconColor = theme === "dark" ? "#fff" : "#000";
+
 
  return (
-   <View className={`w-ful flex-row gap-4 mb-4 border-b ${colors.border} pb-4`}>
-        <View className={`w-12 h-12 items-center justify-center ${colors.card} rounded-full`}>
-            <Feather name={props.icon} size={18} color={colors.icons}/>
+   <View className='w-ful flex-row gap-4 mb-4 border-b border-border pb-4'>
+        <View className='w-12 h-12 items-center justify-center bg-card rounded-full'>
+            <Feather name={props.icon} size={18} color={iconColor}/>
         </View>
         <View className='flex-1 gap-2'>
-            <Text className={`${colors.text } font-bold text-lg`}>{props.title}</Text>
-            <Text className='text-zinc-500'>{props.advice}</Text>
-            <Text className='text-zinc-500'>{props.date}</Text>
+            <Text className='text-text font-bold text-lg'>{props.title}</Text>
+            <Text className='text-secondary'>{props.advice}</Text>
+            <Text className='text-secondary'>{props.date}</Text>
         </View>
    </View>
   );

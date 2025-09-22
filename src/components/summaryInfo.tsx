@@ -12,7 +12,7 @@ export default function SummaryInfo({ icon, info, description }: SummaryInfoProp
         <View className="bg-[#00B030] p-4 rounded-xl flex-1 gap-1">
             <FontAwesome5 name={icon} size={32} color="#fff" />
             <Text className="text-white font-bold text-2xl mt-2">{info}</Text>
-            <Text className="text-white">{description}</Text>
+            <Text className="text-white font-medium">{description}</Text>
         </View>
     )
 }

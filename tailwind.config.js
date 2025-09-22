@@ -5,7 +5,15 @@ module.exports = {
     presets: [require("nativewind/preset")],
     darkMode: "class",
     theme: {
-      extend: {},
+      extend: {
+        colors: {
+          background: "var(--color-bg)",
+          text: "var(--color-text)",
+          secondary: "var(--color-secondary)",
+          card: "var(--color-card)",
+          border: "var(--color-border)",
+        },
+      },
     },
     plugins: [],
 }
