@@ -1,6 +1,5 @@
 import { fetchWithTimeout } from "../utils/fetchWithTimeout";
-
-const BASE_URL = "http://10.3.33.13:5241/api";
+import { BASE_URL } from "../config/config";
 
 export type Patio = {
   capacidade: any;

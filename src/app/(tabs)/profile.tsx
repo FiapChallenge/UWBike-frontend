@@ -4,6 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import ThemeToggle from "@/src/components/themeToggle";
 import { useTheme } from "@/src/context/ThemeProvider";
 import { useAuth } from "@/src/context/AuthContext";
+import { router } from "expo-router";
 
 
 export default function Profile() {
@@ -20,7 +21,7 @@ export default function Profile() {
                             <Feather name="tool" size={32} color={iconColor} />
                         </View>
                         <Text className='text-text font-bold text-xl mt-4'>{usuario?.nome}</Text>
-                        <Text className="text-secondary mt-2">ID/Email Operador</Text>
+                        <Text className="text-secondary mt-2">{usuario?.email}</Text>
                     </View>
 
                     <View className='bg-card p-4 rounded-xl mt-6 gap-4 border-border border'>
@@ -37,6 +38,15 @@ export default function Profile() {
                                 </View>
                                 <ThemeToggle/>
                             </View>
+
+                            <TouchableOpacity 
+                                className="flex-row items-center gap-2"
+                                onPress={() => router.push("/changePassword")}
+                            >
+                                <Feather name="key" size={24} color={iconColor} />
+                                <Text className="text-text">Alterar Senha</Text>
+                            </TouchableOpacity>
+
                             <TouchableOpacity 
                                 className="flex-row items-center gap-2"
                                 onPress={logout}

@@ -68,7 +68,7 @@ export default function Login() {
                   {loading ? (
                     <ActivityIndicator color="#fff" className="py-2" />
                     ) : (
-                    <Text className="text-text font-bold text-lg text-center py-2">
+                    <Text className="text-white font-bold text-lg text-center py-2">
                       ENTRAR
                     </Text>
                   )}

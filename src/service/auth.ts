@@ -1,23 +1,7 @@
 import { fetchWithTimeout } from "../utils/fetchWithTimeout";
+import { BASE_URL } from "../config/config";
+import { ApiResponse, Usuario } from "../../types/types";
 
-
-export type Usuario = {
-  id: string;
-  nome: string;
-  email: string;
-  senha?: string;  
-};
-
-export type ApiResponse<T = any> = {
-  success: boolean;      
-  message?: string;    
-  data?: T;
-  errors?: any[];
-  links?: any[];
-};
-
-// const BASE_URL = 'http://10.3.33.13:8080'; 
-const BASE_URL = 'http://10.3.33.13:5241/api'; 
 
 export async function registerRequest({nome, email, senha} : {nome: string, email: string, senha: string}): Promise<ApiResponse<Usuario>> {
     try {
