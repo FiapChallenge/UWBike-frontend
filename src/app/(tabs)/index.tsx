@@ -3,8 +3,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/header";
 import SummaryInfo from "@/src/components/summaryInfo";
 import QuickActionCard from "@/src/components/quickActionCard";
+import { usePatio } from "@/src/context/PatioContext";
 
 export default function Index() {
+  const { patioAtual } = usePatio();
+
+  if (!patioAtual) {
+    return (
+      <SafeAreaView className="flex-1 bg-background justify-center items-center">
+        <Text className="text-text">Carregando dados do pátio...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const totalMotos = patioAtual.motos?.length ?? 0;
+  const ocupacao = patioAtual.capacidade
+    ? Math.round((totalMotos / patioAtual.capacidade) * 100)
+    : 0;
+
   return (
     <SafeAreaView 
       className='flex-1 bg-background'>
@@ -13,8 +29,8 @@ export default function Index() {
         <View className='bg-card border-border border p-4 rounded-xl mt-16'>
           <Text className='text-text font-bold text-2xl mb-4'>Visão Geral</Text>
           <View className="flex-row gap-4 w-full">
-            <SummaryInfo icon="motorcycle" info="120" description="Motos no pátio" />
-            <SummaryInfo icon="warehouse" info="80%" description="Ocupação" />
+            <SummaryInfo icon="motorcycle" info={totalMotos.toString()} description="Motos no pátio" />
+            <SummaryInfo icon="warehouse"  info={`${ocupacao}%`} description="Ocupação" />
           </View>
         </View>
         <View className='mt-8'>

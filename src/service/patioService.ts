@@ -1,8 +1,10 @@
 import { fetchWithTimeout } from "../utils/fetchWithTimeout";
 
-const BASE_URL = "https://mariann-exculpable-zetta.ngrok-free.dev/api";
+const BASE_URL = "http://10.3.33.13:5241/api";
 
 export type Patio = {
+  capacidade: any;
+  motos: any;
   id: number;
   nome: string;
   endereco: string;

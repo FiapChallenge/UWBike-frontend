@@ -16,7 +16,8 @@ export type ApiResponse<T = any> = {
   links?: any[];
 };
 
-const BASE_URL = 'https://mariann-exculpable-zetta.ngrok-free.dev/api'; 
+// const BASE_URL = 'http://10.3.33.13:8080'; 
+const BASE_URL = 'http://10.3.33.13:5241/api'; 
 
 export async function registerRequest({nome, email, senha} : {nome: string, email: string, senha: string}): Promise<ApiResponse<Usuario>> {
     try {
@@ -42,6 +43,10 @@ export async function registerRequest({nome, email, senha} : {nome: string, emai
 export async function loginRequest({email, senha}: {email: string, senha: string}): Promise<ApiResponse<Usuario>> {
     try{
         const url = `${BASE_URL}/Usuarios/buscar?email=${email}`;
+        console.log(url
+
+        );
+        
 
         const response = await fetchWithTimeout(url, {
             method: 'GET',

@@ -3,10 +3,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
 import ThemeToggle from "@/src/components/themeToggle";
 import { useTheme } from "@/src/context/ThemeProvider";
+import { useAuth } from "@/src/context/AuthContext";
 
 
 export default function Profile() {
     const { theme } = useTheme();
+    const { usuario, logout } = useAuth();
     const iconColor = theme === "dark" ? "#fff" : "#000";
     
     return (
@@ -17,7 +19,7 @@ export default function Profile() {
                         <View className='bg-card w-20 h-20 rounded-full items-center justify-center border-border border'>
                             <Feather name="tool" size={32} color={iconColor} />
                         </View>
-                        <Text className='text-text font-bold text-xl mt-4'>Rogério N. S. Moraes</Text>
+                        <Text className='text-text font-bold text-xl mt-4'>{usuario?.nome}</Text>
                         <Text className="text-secondary mt-2">ID/Email Operador</Text>
                     </View>
 
@@ -35,7 +37,10 @@ export default function Profile() {
                                 </View>
                                 <ThemeToggle/>
                             </View>
-                            <TouchableOpacity className="flex-row items-center gap-2">
+                            <TouchableOpacity 
+                                className="flex-row items-center gap-2"
+                                onPress={logout}
+                            >
                                 <Feather name="log-out" size={24} color="red" />
                                 <Text className="text-red-600">Sair</Text>
                             </TouchableOpacity>

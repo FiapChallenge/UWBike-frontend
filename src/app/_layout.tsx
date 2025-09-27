@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Stack>
+        <Stack >
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="notifications" options={{ headerShown: false}} />
