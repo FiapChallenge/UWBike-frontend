@@ -6,7 +6,9 @@ type PatioContextType = {
   patios: Patio[];
   patioAtual: Patio | null;
   selecionarPatio: (id: number) => Promise<void>;
+  carregarPatios: () => Promise<void>;
   loading: boolean;
+  refreshing: boolean;
 };
 
 const PatioContext = createContext<PatioContextType>({} as PatioContextType);
@@ -15,6 +17,25 @@ export function PatioProvider({ children }: { children: React.ReactNode }) {
   const [patios, setPatios] = useState<Patio[]>([]);
   const [patioAtual, setPatioAtual] = useState<Patio | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const carregarPatios = async () => {
+    try {
+      setRefreshing(true);
+      const lista = await getPatios();
+      setPatios(lista);
+
+      setPatioAtual((atual) => {
+        if (!atual) return lista[0] || null;
+        const aindaExiste = lista.find(p => p.id === atual.id);
+        return aindaExiste || lista[0] || null;
+      });
+    } catch (e) {
+      console.error("Erro ao carregar pátios:", e);
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -48,7 +69,7 @@ export function PatioProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <PatioContext.Provider value={{ patios, patioAtual, selecionarPatio, loading }}>
+    <PatioContext.Provider value={{ patios, patioAtual, selecionarPatio, carregarPatios, loading, refreshing }}>
       {children}
     </PatioContext.Provider>
   );

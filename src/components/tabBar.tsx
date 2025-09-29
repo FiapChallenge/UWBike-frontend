@@ -6,7 +6,6 @@ import { Feather } from "@expo/vector-icons";
 export default function TabBar({state,descriptors,navigation,}: BottomTabBarProps) {
   const icons: Record<string, keyof typeof Feather.glyphMap> = {
     index: "home",
-    search: "search",
     profile: "user",
   };
 

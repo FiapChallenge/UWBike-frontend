@@ -39,7 +39,7 @@ export default function Header(){
                 >
                     <View className="w-2 h-2 bg-[#00B030] rounded-full" />
                     <Text className="text-text font-bold text-lg">
-                        {loading ? "Carregando..." : patioAtual?.nome || "Nenhum pátio"}
+                        {patioAtual?.nome || "Nenhum pátio"}
                     </Text>
                     <Feather name="chevron-down" size={18} color={iconColor} />
                 </TouchableOpacity>

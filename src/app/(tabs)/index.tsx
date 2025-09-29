@@ -4,9 +4,19 @@ import Header from "../../components/header";
 import SummaryInfo from "@/src/components/summaryInfo";
 import QuickActionCard from "@/src/components/quickActionCard";
 import { usePatio } from "@/src/context/PatioContext";
+import { useCallback } from "react";
+import { useFocusEffect } from "expo-router";
 
 export default function Index() {
-  const { patioAtual } = usePatio();
+
+
+  const { patioAtual, carregarPatios } = usePatio(); 
+
+  useFocusEffect(
+    useCallback(() => {
+      carregarPatios();
+    }, [carregarPatios])
+  );
 
   if (!patioAtual) {
     return (
