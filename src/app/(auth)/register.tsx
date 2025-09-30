@@ -31,6 +31,12 @@ export default function Register() {
       return;
     }
 
+    if (senha.length < 6) {
+      setLoading(false);
+      setErrorMessage("A senha deve ter no mínimo 6 caracteres.");
+      return;
+    }
+
     try {
       await register(nome, email, senha);
       router.push("../(tabs)");
