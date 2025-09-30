@@ -25,13 +25,78 @@ Para instalar as dependências do projeto siga estas etapas:
 npm install
 ```
 
-## ☕ Executando o projeto
+## 🚀 Como rodar o projeto
 
-Para executar o projeto, siga estas etapas:
+### 1. Configuração da API (.NET)
 
-``` bash
+1. Localize o arquivo `launchSettings.json` no projeto da API.
+2. Pegue o **IPv4 da sua máquina** (no Windows, use `ipconfig` no terminal).
+3. Substitua o trecho da configuração para incluir seu IPv4 no campo `applicationUrl`. Exemplo:
+
+```json
+"http": {
+  "commandName": "Project",
+  "dotnetRunMessages": true,
+  "launchBrowser": true,
+  "applicationUrl": "http://SEU_IPV4_AQUI:5241",
+  "environmentVariables": {
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  }
+}
+```
+
+---
+
+### 2. Configuração do App React Native
+
+1. No projeto React Native, abra a pasta `config`.
+2. Localize o arquivo de configuração (ex: `config.js`).
+3. Substitua o `localhost` pelo mesmo **IPv4** definido no passo anterior.
+
+Exemplo:
+
+```js
+// Antes
+const BASE_URL = "http://localhost:5241/api";
+
+// Depois
+const BASE_URL = "http://SEU_IPV4_AQUI:5241/api";
+```
+
+---
+
+### 3. Instalação das dependências
+
+No terminal, dentro de cada projeto (API e React Native), instale as dependências:
+
+```bash
+# Na API (.NET)
+dotnet restore
+
+# No React Native
+npm install
+```
+
+---
+
+### 4. Rodando o projeto
+
+* Para rodar a API:
+
+```bash
+dotnet run
+```
+
+* Para rodar o React Native:
+
+```bash
 npx expo start
 ```
+
+---
+
+✅ Agora sua API e o app React Native estarão conectados e rodando na mesma rede local.
+
 
 > Caso possua o Android Studio instalado e configurado em sua máquina, basta digitar `a` no terminal para abrir um dispositivo Android.
 
