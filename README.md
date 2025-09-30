@@ -102,6 +102,35 @@ npx expo start
 
 > Caso não possua, instale o Expo Go em seu smartphone e escaneie o QR Code gerado no terminal que será exibido em seu smartphone (necessário que o PC e Smartphone estejam na mesma rede).
 
+
+## 📂 Estrutura de Pastas
+
+Abaixo está a organização atual do projeto:
+
+```
+src
+ ├── app
+ │    ├── (auth)
+ │    └── (tabs)
+ │
+ ├── components
+ │
+ ├── config
+ │
+ ├── context
+ │
+ ├── hooks
+ │
+ ├── service
+ │
+ ├── styles
+ │
+ └── utils
+ │
+ └── types
+```
+
+
 ## 🤝 Colaboradores
 
 Agradecemos às seguintes pessoas que contribuíram para este projeto:
