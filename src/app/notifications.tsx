@@ -4,8 +4,10 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Notificationlist } from "../components/notificationList";
 import { useTheme } from "../context/ThemeProvider";
+import { useTranslation } from "react-i18next";
 
 export default function Notifications() {    
+  const{t} = useTranslation();
   const { theme } = useTheme();
   const iconColor = theme === "dark" ? "#fff" : "#000";
 
@@ -21,7 +23,7 @@ export default function Notifications() {
           </TouchableOpacity>
 
           <Text className='text-text font-bold text-xl'>
-            Notificações
+            {t('notifications.title')}
           </Text>
         </View>
 

@@ -6,19 +6,10 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
 import { BASE_URL } from "../config/config";
 import { usePatio } from "../context/PatioContext";
-
-type Moto = {
-  id: number;
-  modelo: string;
-  placa: string;
-  chassi: string;
-  anoFabricacao: number;
-  cor: string;
-  ativo: boolean;
-  patioId: number;
-};
+import { useTranslation } from "react-i18next";
 
 export default function EditBike() {
+  const{t} = useTranslation();
   const { theme } = useTheme();
   const iconColor = theme === "dark" ? "#fff" : "#000";
 
@@ -100,10 +91,10 @@ export default function EditBike() {
         >
           <Feather name="arrow-left" size={24} color={iconColor} />
         </TouchableOpacity>
-        <Text className="text-text font-bold text-xl">Editar Moto</Text>
+        <Text className="text-text font-bold text-xl">{t('editBike.title')}</Text>
       </View>
         {carregandoMoto ? (
-            <Text>Carregando dados da moto...</Text>
+            <Text>{t('editBike.loading')}</Text>
         ) : (
             <View className="gap-4">
                 <TextInput
@@ -121,14 +112,14 @@ export default function EditBike() {
                 className="bg-card p-4 rounded-xl border border-border text-text"
                 />
                 <TextInput
-                placeholder="Chassi"
+                placeholder={t('editBike.chassi')}
                 placeholderTextColor={"#8e8e8e"}
                 value={chassi}
                 onChangeText={setChassi}
                 className="bg-card p-4 rounded-xl border border-border text-text"
                 />
                 <TextInput
-                placeholder="Ano de Fabricação"
+                placeholder={t('editBike.year')}
                 placeholderTextColor={"#8e8e8e"}
                 value={anoFabricacao}
                 onChangeText={setAnoFabricacao}
@@ -136,7 +127,7 @@ export default function EditBike() {
                 className="bg-card p-4 rounded-xl border border-border text-text"
                 />
                 <TextInput
-                placeholder="Cor"
+                placeholder={t('editBike.color')}
                 placeholderTextColor={"#8e8e8e"}
                 value={cor}
                 onChangeText={setCor}
@@ -149,7 +140,7 @@ export default function EditBike() {
                 disabled={loading}
                 >
                 <Text className="text-white font-bold">
-                    {loading ? "Editando..." : "Salvar Alterações"}
+                    {loading ? "Editando..." : t('editBike.save')}
                 </Text>
                 </TouchableOpacity>
             </View>

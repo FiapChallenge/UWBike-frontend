@@ -6,7 +6,8 @@ import React, {
   useContext,
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { loginRequest, registerRequest, Usuario } from "../service/auth";
+import { loginRequest, registerRequest } from "../service/auth";
+import { Usuario } from "@/types/types";
 
 type AuthContextType = {
   usuario: Usuario | null;

@@ -1,7 +1,7 @@
-import { useAuth } from "@/src/context/AuthContext";
-import { registerRequest } from "@/src/service/auth";
+import { useAuth } from "@/src/context/AuthContext"; 
 import { router } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Pressable,
   View,
@@ -14,6 +14,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Register() {
+  const{t} = useTranslation();
   const { register } = useAuth();
 
   const [nome, setNome] = useState("");
@@ -27,13 +28,13 @@ export default function Register() {
     setErrorMessage("");
 
     if (!nome || !email || !senha) {
-      Alert.alert("Atenção", "Preencha todos os campos!");
+      Alert.alert(t('register.alertEmpty'));
       return;
     }
 
     if (senha.length < 6) {
       setLoading(false);
-      setErrorMessage("A senha deve ter no mínimo 6 caracteres.");
+      setErrorMessage(t('register.alertShortPassword'));
       return;
     }
 
@@ -41,7 +42,7 @@ export default function Register() {
       await register(nome, email, senha);
       router.push("../(tabs)");
     } catch (error: any) {
-      setErrorMessage(error.message || "Erro ao criar conta. Tente novamente.");
+      setErrorMessage(error.message || t('register.error'));
     } finally {
       setLoading(false);
     }
@@ -55,19 +56,19 @@ export default function Register() {
           className="self-center w-40 h-40"
         />
         <Text className="text-text font-bold text-2xl text-center">
-          Registro
+          {t('register.title')}
         </Text>
         <View className="flex gap-6">
           <TextInput
             className="bg-card rounded-lg px-2 py-4 border-border border text-text"
-            placeholder="Nome completo"
+            placeholder={t('register.name')}
             placeholderTextColor={"#8e8e8e"}
             value={nome}
             onChangeText={setNome}
           />
           <TextInput
             className="bg-card rounded-lg px-2 py-4 border-border border text-text"
-            placeholder="Email"
+            placeholder={t('register.email')}
             placeholderTextColor={"#8e8e8e"}
             value={email}
             onChangeText={setEmail}
@@ -76,7 +77,7 @@ export default function Register() {
           />
           <TextInput
             className="bg-card rounded-lg px-2 py-4 border-border border text-text"
-            placeholder="Senha"
+            placeholder={t('register.password')}
             placeholderTextColor={"#8e8e8e"}
             value={senha}
             onChangeText={setSenha}
@@ -96,19 +97,19 @@ export default function Register() {
               <ActivityIndicator color="#fff" className="py-2" />
             ) : (
               <Text className="text-white font-bold text-lg text-center py-2">
-                CRIAR CONTA
+                {t('register.create')}
               </Text>
             )}
           </Pressable>
 
           <View className="flex-row gap-2">
-            <Text className="text-text items-center">Já possui conta?</Text>
+            <Text className="text-text items-center">{t('register.haveAccount')}</Text>
             <Pressable>
               <Text
                 className="text-[#00b030] underline"
                 onPress={() => router.back()}
               >
-                Entrar na conta
+                {t('register.enterAccount')}
               </Text>
             </Pressable>
           </View>

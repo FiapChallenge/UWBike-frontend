@@ -6,8 +6,10 @@ import { useTheme } from "../context/ThemeProvider";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { getUserById, updateUser } from "../service/user";
+import { useTranslation } from "react-i18next";
 
 export default function ChangePassword() {
+    const{t} = useTranslation();
     const { theme } = useTheme();
     const iconColor = theme === "dark" ? "#fff" : "#000";
 
@@ -19,17 +21,17 @@ export default function ChangePassword() {
 
     const handleChangePassword = async () => {
         if (!usuario?.id) {
-            Alert.alert("Erro", "Usuário não encontrado.");
+            Alert.alert("Erro", t('changePassword.error.userNotFound'));
             return;
         }
 
         if (!senhaAtual || !novaSenha || !confirmarSenha) {
-            Alert.alert("Erro", "Preencha todos os campos.");
+            Alert.alert("Erro", t('changePassword.error.emptyFields'));
             return;
         }
 
         if (novaSenha !== confirmarSenha) {
-            Alert.alert("Erro", "A nova senha e a confirmação não coincidem.");
+            Alert.alert("Erro", t('changePassword.error.emptyFields'));
             return;
         }
 
@@ -38,7 +40,7 @@ export default function ChangePassword() {
 
             const res = await getUserById(usuario.id);
             if (!res.success || !res.data) {
-                Alert.alert("Erro", "Não foi possível buscar os dados do usuário.");
+                Alert.alert("Erro", t('changePassword.error.fetchUser'));
                 setLoading(false);
                 return;
             }
@@ -46,7 +48,7 @@ export default function ChangePassword() {
             const userData = res.data;
 
             if (userData.senha !== senhaAtual) {
-                Alert.alert("Erro", "Senha atual incorreta.");
+                Alert.alert("Erro", t('changePassword.error.wrongPassword'));
                 setLoading(false);
                 return;
             }
@@ -56,13 +58,13 @@ export default function ChangePassword() {
             const updateRes = await updateUser(usuario.id, updatedUser);
 
             if (updateRes.success) {
-                Alert.alert("Sucesso", "Senha alterada com sucesso!");
+                Alert.alert("Sucesso", t('changePassword.success'));
                 router.back();
             } else {
-                Alert.alert("Erro", updateRes.message || "Não foi possível alterar a senha.");
+                Alert.alert("Erro", updateRes.message || t('changePassword.error.notPossible'));
             }
         } catch (error:any) {
-            Alert.alert("Erro", "Ocorreu um erro ao alterar a senha." + error.message);
+            Alert.alert("Erro", t('changePassword.error.change') + error.message);
         } finally {
             setLoading(false);
         }
@@ -79,12 +81,12 @@ export default function ChangePassword() {
                     >
                         <Feather name="arrow-left" size={24} color={iconColor} />
                     </TouchableOpacity>
-                    <Text className="text-text font-bold text-xl">Alterar Senha</Text>
+                    <Text className="text-text font-bold text-xl">{t('changePassword.title')}</Text>
                 </View>
 
                 <View className="mt-8">
                     <TextInput
-                        placeholder="Senha Atual"
+                        placeholder={t('changePassword.currentPassword')}
                         placeholderTextColor={"#8e8e8e"} 
                         secureTextEntry
                         value={senhaAtual}
@@ -92,7 +94,7 @@ export default function ChangePassword() {
                         className="bg-card rounded-lg px-2 py-4 border-border border text-text mb-4"
                     />
                     <TextInput
-                        placeholder="Nova Senha"
+                        placeholder={t('changePassword.newPassword')}
                         placeholderTextColor={"#8e8e8e"} 
                         secureTextEntry
                         value={novaSenha}
@@ -101,7 +103,7 @@ export default function ChangePassword() {
                     />
 
                     <TextInput
-                        placeholder="Confirmar Nova Senha"
+                        placeholder={t('changePassword.confirmPassword')}
                         placeholderTextColor={"#8e8e8e"} 
                         secureTextEntry
                         value={confirmarSenha}
@@ -115,7 +117,7 @@ export default function ChangePassword() {
                         disabled={loading}
                     >
                         <Text className="text-white font-bold">
-                        {loading ? "Alterando..." : "Confirmar Alteração"}
+                        {loading ? t('changePassword.changing') : t('changePassword.confirmChange')}
                         </Text>
                     </TouchableOpacity>
                 </View>

@@ -8,8 +8,10 @@ import { useEffect, useState } from "react";
 import { usePatio } from "../context/PatioContext";
 import { useMoto } from "../context/MotoContext";
 import { useMotoActions } from "../hooks/useMoto";
+import { useTranslation } from "react-i18next";
 
 export default function ManageBike() {
+    const{t} = useTranslation();
     const { theme } = useTheme();
     const iconColor = theme === "dark" ? "#fff" : "#000";
 
@@ -47,7 +49,7 @@ export default function ManageBike() {
                         <Feather name="arrow-left" size={24} color={iconColor} />
                     </TouchableOpacity>
                 
-                    <Text className='text-text font-bold text-xl'>Gerenciar Motos</Text>
+                    <Text className='text-text font-bold text-xl'>{t('manageBike.title')}</Text>
                     
                     <TouchableOpacity
                         onPress={() => router.push("/addBike")}
@@ -64,9 +66,9 @@ export default function ManageBike() {
                         renderItem={({ item }) => (
                             <View className="p-4 mb-2 bg-card rounded-lg border border-border">
                                 <Text className="text-text font-semibold">{item.modelo}</Text>
-                                <Text className="text-text">Placa: {item.placa}</Text>
-                                <Text className="text-text">Chassi: {item.chassi}</Text>
-                                <Text className="text-text">Ano: {item.anoFabricacao}</Text>
+                                <Text className="text-text">{t('manageBike.plate')}: {item.placa}</Text>
+                                <Text className="text-text">{t('manageBike.chassi')}: {item.chassi}</Text>
+                                <Text className="text-text">{t('manageBike.year')}: {item.anoFabricacao}</Text>
 
                                 <View className="flex-row justify-end mt-2 gap-4">
                                     <TouchableOpacity
@@ -87,7 +89,7 @@ export default function ManageBike() {
                         )}
                         ListEmptyComponent={() => (
                         <Text className="text-text text-center mt-8">
-                            Nenhuma moto encontrada
+                            {t('manageBike.noBikes')}
                         </Text>
                         )}
                     />

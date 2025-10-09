@@ -1,10 +1,12 @@
 import { useAuth } from "@/src/context/AuthContext";
 import { router } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Pressable, View, Text, Image, TextInput, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
+  const{t}=useTranslation();
   const { login } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -15,7 +17,7 @@ export default function Login() {
   const handleLogin = async () => {
     setErrorMsg(null);
     if (!email || !senha) {
-      setErrorMsg('Por favor, informe email e senha.');
+      setErrorMsg(t('login.errorEmpty'));
       return;
     }
 
@@ -24,8 +26,7 @@ export default function Login() {
       await login(email, senha);
       router.push('../(tabs)');
     } catch (err: any) {
-      console.error('Falha no login:', err);
-      setErrorMsg(err.message || 'Falha ao tentar fazer login.');
+      setErrorMsg(err.message || t('login.errorLogin'));
     } finally {
       setLoading(false);
     }
@@ -35,12 +36,12 @@ export default function Login() {
     <SafeAreaView className="flex-1 bg-background">
         <View className="w-full mt-40 px-4 flex-1 gap-8">
             <Image source={require("../../../assets/images/logo-uwbike.png")} className="self-center w-40 h-40"/>
-            <Text className="text-text font-bold text-2xl text-center">Login</Text>
+            <Text className="text-text font-bold text-2xl text-center">{t('login.title')}</Text>
 
             <View className="flex gap-6">
                 <TextInput 
                     className="bg-card rounded-lg px-2 py-4 border-border border text-text" 
-                    placeholder="Email" 
+                    placeholder={t('login.email')} 
                     placeholderTextColor={"#8e8e8e"} 
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -49,7 +50,7 @@ export default function Login() {
                 />
                 <TextInput 
                     className="bg-card rounded-lg px-2 py-4 border-border border text-text" 
-                    placeholder="Senha" 
+                    placeholder={t('login.password')} 
                     placeholderTextColor={"#8e8e8e"}
                     secureTextEntry
                     value={senha}
@@ -69,14 +70,14 @@ export default function Login() {
                     <ActivityIndicator color="#fff" className="py-2" />
                     ) : (
                     <Text className="text-white font-bold text-lg text-center py-2">
-                      ENTRAR
+                      {t('login.enter')}
                     </Text>
                   )}
                 </Pressable>
 
                 <View className="flex-row gap-2">
-                    <Text className="text-text items-center">Não possui conta?</Text>
-                    <Pressable><Text className="text-[#00b030] underline" onPress={() => router.push("/register")}>Criar conta</Text></Pressable>
+                    <Text className="text-text items-center">{t('login.noAccount')}</Text>
+                    <Pressable><Text className="text-[#00b030] underline" onPress={() => router.push("/register")}>{t('login.createAccount')}</Text></Pressable>
                 </View>
             </View>
         </View>

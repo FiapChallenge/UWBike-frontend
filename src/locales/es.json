@@ -1,0 +1,73 @@
+{
+  "login": {
+    "title": "Iniciar Sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "enter": "ENTRAR",
+    "noAccount": "¿No tienes una cuenta?",
+    "createAccount": "Crear cuenta",
+    "errorEmpty": "Por favor, ingresa correo y contraseña.",
+    "errorLogin": "Error al intentar iniciar sesión."
+  },
+  "register": {
+    "title": "Registro",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "create": "CREAR CUENTA",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "enterAccount": "Iniciar sesión",
+    "alertEmpty": "¡Rellena todos los campos!",
+    "alertShortPassword": "La contraseña debe tener al menos 6 caracteres.",
+    "error": "Error al crear la cuenta. Inténtalo de nuevo."
+  },
+  "home": {
+    "overview": "Visión General",
+    "bikesInPatio": "Motos en el patio",
+    "occupancy": "Ocupación",
+    "quickActions": "Acciones Rápidas",
+    "locateBike": "Localizar moto",
+    "manageBikes": "Gestionar motos",
+    "loadingPatio": "Cargando datos del patio..."
+  },
+  "profile": {
+    "preferences": "Preferencias",
+    "darkMode": "Modo Oscuro",
+    "changePassword": "Cambiar Contraseña",
+    "logout": "Cerrar Sesión"
+  },
+  "changePassword": {
+    "title": "Cambiar Contraseña",
+    "currentPassword": "Contraseña Actual",
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Nueva Contraseña",
+    "confirmChange": "Confirmar Cambio",
+    "changing": "Cambiando...",
+    "success": "¡Contraseña cambiada con éxito!",
+    "error": {
+      "userNotFound": "Usuario no encontrado.",
+      "emptyFields": "Rellena todos los campos.",
+      "mismatch": "La nueva contraseña y la confirmación no coinciden.",
+      "wrongPassword": "Contraseña actual incorrecta.",
+      "fetchUser": "No fue posible obtener los datos del usuario."
+    }
+  },
+  "manageBike": {
+    "title": "Gestionar Motos",
+    "noBikes": "No se encontraron motos",
+    "plate": "Placa",
+    "chassi": "Chasis",
+    "year": "Año"
+  },
+  "editBike": {
+    "title": "Editar Moto",
+    "chassi": "Chasis",
+    "year": "Año de Fabricación",
+    "color": "Color",
+    "save": "Guardar Cambios",
+    "loading": "Cargando datos de la moto..."
+  },
+  "notifications": {
+    "title": "Notificaciones"
+  }
+}
