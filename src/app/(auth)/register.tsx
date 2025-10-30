@@ -50,12 +50,12 @@ export default function Register() {
 
   return (
     <SafeAreaView className="flex-1 bg-background">
-      <View className="w-full mt-4 px-4 flex-1 justify-center gap-8">
+      <View className="w-full mt-40 px-4 flex-1 gap-8">
         <Image
           source={require("../../../assets/images/logo-uwbike.png")}
           className="self-center w-40 h-40"
         />
-        <Text className="text-text font-bold text-2xl text-center">
+        <Text className="text-text font-bold text-3xl text-center">
           {t('register.title')}
         </Text>
         <View className="flex gap-6">

@@ -81,7 +81,7 @@ export default function ChangePassword() {
                     >
                         <Feather name="arrow-left" size={24} color={iconColor} />
                     </TouchableOpacity>
-                    <Text className="text-text font-bold text-xl">{t('changePassword.title')}</Text>
+                    <Text className="text-text font-bold text-2xl">{t('changePassword.title')}</Text>
                 </View>
 
                 <View className="mt-8">

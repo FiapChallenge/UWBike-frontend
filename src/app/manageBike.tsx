@@ -49,7 +49,7 @@ export default function ManageBike() {
                         <Feather name="arrow-left" size={24} color={iconColor} />
                     </TouchableOpacity>
                 
-                    <Text className='text-text font-bold text-xl'>{t('manageBike.title')}</Text>
+                    <Text className='text-text font-bold text-2xl'>{t('manageBike.title')}</Text>
                     
                     <TouchableOpacity
                         onPress={() => router.push("/addBike")}

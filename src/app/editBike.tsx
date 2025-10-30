@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { BASE_URL } from "../config/config";
 import { usePatio } from "../context/PatioContext";
 import { useTranslation } from "react-i18next";
+import ModelSlider from "../components/modelSlider";
 
 export default function EditBike() {
   const{t} = useTranslation();
@@ -20,7 +21,7 @@ export default function EditBike() {
   const [placa, setPlaca] = useState("");
   const [chassi, setChassi] = useState("");
   const [anoFabricacao, setAnoFabricacao] = useState("");
-  const [cor, setCor] = useState("");
+  const cor = "verde";
   const [loading, setLoading] = useState(false);
   const [carregandoMoto, setCarregandoMoto] = useState(true);
 
@@ -42,7 +43,6 @@ export default function EditBike() {
           setPlaca(moto.placa);
           setChassi(moto.chassi);
           setAnoFabricacao(String(moto.anoFabricacao));
-          setCor(moto.cor);
         }
       } catch (err) {
         console.error("Erro ao buscar moto:", err);
@@ -91,18 +91,15 @@ export default function EditBike() {
         >
           <Feather name="arrow-left" size={24} color={iconColor} />
         </TouchableOpacity>
-        <Text className="text-text font-bold text-xl">{t('editBike.title')}</Text>
+        <Text className="text-text font-bold text-2xl">{t('editBike.title')}</Text>
       </View>
         {carregandoMoto ? (
             <Text>{t('editBike.loading')}</Text>
         ) : (
             <View className="gap-4">
-                <TextInput
-                placeholder="Modelo"
-                placeholderTextColor={"#8e8e8e"}
-                value={modelo}
-                onChangeText={setModelo}
-                className="bg-card p-4 rounded-xl border border-border text-text"
+                <ModelSlider
+                  onSelect={(value: string) => setModelo(value)}
+                  selectedValue={modelo}   
                 />
                 <TextInput
                 placeholder="Placa"
@@ -126,14 +123,6 @@ export default function EditBike() {
                 keyboardType="numeric"
                 className="bg-card p-4 rounded-xl border border-border text-text"
                 />
-                <TextInput
-                placeholder={t('editBike.color')}
-                placeholderTextColor={"#8e8e8e"}
-                value={cor}
-                onChangeText={setCor}
-                className="bg-card p-4 rounded-xl border border-border text-text"
-                />
-
                 <TouchableOpacity
                 onPress={handleEditBike}
                 className="bg-[#00B030] p-4 rounded-xl items-center"

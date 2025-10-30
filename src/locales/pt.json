@@ -11,7 +11,7 @@
   },
   "register": {
     "title": "Registro",
-    "name": "Nome completo",
+    "name": "Nome",
     "email": "Email",
     "password": "Senha",
     "create": "CRIAR CONTA",

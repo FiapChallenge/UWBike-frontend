@@ -22,7 +22,7 @@ export default function Notifications() {
             <Feather name="arrow-left" size={24} color={iconColor} />
           </TouchableOpacity>
 
-          <Text className='text-text font-bold text-xl'>
+          <Text className='text-text font-bold text-2xl'>
             {t('notifications.title')}
           </Text>
         </View>

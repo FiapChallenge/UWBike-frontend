@@ -7,17 +7,18 @@ import { router } from "expo-router";
 import { useState } from "react";
 import { usePatio } from "../context/PatioContext";
 import { BASE_URL } from "../config/config";
+import ModelSlider from "../components/modelSlider";
 
 export default function AddBike() {
   const { theme } = useTheme();
   const iconColor = theme === "dark" ? "#fff" : "#000";
   const { patioAtual } = usePatio();
 
-  const [modelo, setModelo] = useState("");
+  const [modeloSelecionado, setModeloSelecionado] = useState<string>("");
   const [placa, setPlaca] = useState("");
   const [chassi, setChassi] = useState("");
   const [anoFabricacao, setAnoFabricacao] = useState("");
-  const [cor, setCor] = useState("");
+  const cor = "verde";
   const [loading, setLoading] = useState(false);
 
   const handleAddBike = async () => {
@@ -29,7 +30,7 @@ export default function AddBike() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          modelo,
+          modelo: modeloSelecionado,
           placa,
           chassi,
           anoFabricacao: Number(anoFabricacao),
@@ -57,17 +58,11 @@ export default function AddBike() {
         >
           <Feather name="arrow-left" size={24} color={iconColor} />
         </TouchableOpacity>
-        <Text className="text-text font-bold text-xl">Adicionar Moto</Text>
+        <Text className="text-text font-bold text-2xl">Adicionar Moto</Text>
       </View>
 
       <View className="gap-4">
-        <TextInput
-          placeholder="Modelo"
-          placeholderTextColor={"#8e8e8e"} 
-          value={modelo}
-          onChangeText={setModelo}
-          className="bg-card p-4 rounded-xl border border-border text-text"
-        />
+        <ModelSlider onSelect={(nome : string) => setModeloSelecionado(nome)}/>
         <TextInput
           placeholder="Placa"
           placeholderTextColor={"#8e8e8e"} 
@@ -90,14 +85,6 @@ export default function AddBike() {
           keyboardType="numeric"
           className="bg-card p-4 rounded-xl border border-border text-text"
         />
-        <TextInput
-          placeholder="Cor"
-          placeholderTextColor={"#8e8e8e"} 
-          value={cor}
-          onChangeText={setCor}
-          className="bg-card p-4 rounded-xl border border-border text-text"
-        />
-
         <TouchableOpacity
           onPress={handleAddBike}
           className="bg-[#00B030] p-4 rounded-xl items-center"
