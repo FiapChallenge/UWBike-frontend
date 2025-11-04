@@ -7,8 +7,8 @@ import SearchBar from "../components/searchBar";
 import { useEffect, useState } from "react";
 import { usePatio } from "../context/PatioContext";
 import { useMoto } from "../context/MotoContext";
-import { useMotoActions } from "../hooks/useMoto";
 import { useTranslation } from "react-i18next";
+import BikeCard from "../components/bikeCard";
 
 export default function ManageBike() {
     const{t} = useTranslation();
@@ -20,9 +20,7 @@ export default function ManageBike() {
     const { patioAtual } = usePatio();
     const { motos, carregarMotos } = useMoto();
 
-    const { deleteMoto } = useMotoActions();
-
-
+   
    useEffect(() => {
         if (patioAtual) {
         carregarMotos(patioAtual.id); 
@@ -64,28 +62,7 @@ export default function ManageBike() {
                         data={motosExibidas}
                         keyExtractor={(item) => String(item.id)}
                         renderItem={({ item }) => (
-                            <View className="p-4 mb-2 bg-card rounded-lg border border-border">
-                                <Text className="text-text font-semibold">{item.modelo}</Text>
-                                <Text className="text-text">{t('manageBike.plate')}: {item.placa}</Text>
-                                <Text className="text-text">{t('manageBike.chassi')}: {item.chassi}</Text>
-                                <Text className="text-text">{t('manageBike.year')}: {item.anoFabricacao}</Text>
-
-                                <View className="flex-row justify-end mt-2 gap-4">
-                                    <TouchableOpacity
-                                    onPress={() => router.push(`/editBike?id=${item.id}`)}
-                                    className="bg-blue-600 px-3 py-1 rounded"
-                                    >
-                                        <Feather name="edit" size={18} color="#fff"></Feather>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity
-                                    onPress={() => deleteMoto(item.id)}
-                                    className="bg-red-600 px-3 py-1 rounded"
-                                    >
-                                        <Feather name="trash" size={18} color="#fff"></Feather>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
+                            <BikeCard {...item} />
                         )}
                         ListEmptyComponent={() => (
                         <Text className="text-text text-center mt-8">

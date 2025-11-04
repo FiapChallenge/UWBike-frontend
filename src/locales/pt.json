@@ -68,7 +68,8 @@
     "year": "Ano de Fabricação",
     "color": "Cor",
     "save": "Salvar Alterações",
-    "loading": "Carregando dados da moto..."
+    "loading": "Carregando dados da moto...",
+    "delete": "Excluir moto"
   },
   "notifications": {
     "title": "Notificações"

@@ -1,7 +1,6 @@
-// src/pages/AddBike.tsx
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "../context/ThemeProvider";
-import { TouchableOpacity, View, Text, TextInput } from "react-native";
+import { TouchableOpacity, View, Text, TextInput, Alert } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -24,6 +23,31 @@ export default function AddBike() {
   const handleAddBike = async () => {
     if (!patioAtual) return;
 
+    if (!modeloSelecionado.trim()) {
+      Alert.alert("Validação", "Selecione o modelo da moto.");
+      return;
+    }
+
+    if (!placa.trim()) {
+      Alert.alert("Validação", "Informe a placa da moto.");
+      return;
+    }
+
+    if (!chassi.trim()) {
+      Alert.alert("Validação", "Informe o número do chassi.");
+      return;
+    }
+
+    if (!anoFabricacao.trim()) {
+      Alert.alert("Validação", "Informe o ano de fabricação.");
+      return;
+    }
+
+    if (isNaN(Number(anoFabricacao)) || anoFabricacao.length < 4) {
+      Alert.alert("Validação","Digite um ano de fabricação válido (ex: 2022).");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch(`${BASE_URL}/Motos`, {
@@ -40,10 +64,12 @@ export default function AddBike() {
       });
 
       if (!res.ok) throw new Error("Erro ao adicionar moto");
+      Alert.alert("Sucesso", "Moto adicionada com sucesso!");
 
       router.back();
     } catch (error) {
       console.error(error);
+      Alert.alert("Erro", "Não foi possível adicionar a moto.");
     } finally {
       setLoading(false);
     }
@@ -62,24 +88,24 @@ export default function AddBike() {
       </View>
 
       <View className="gap-4">
-        <ModelSlider onSelect={(nome : string) => setModeloSelecionado(nome)}/>
+        <ModelSlider onSelect={(nome: string) => setModeloSelecionado(nome)} />
         <TextInput
           placeholder="Placa"
-          placeholderTextColor={"#8e8e8e"} 
+          placeholderTextColor={"#8e8e8e"}
           value={placa}
           onChangeText={setPlaca}
           className="bg-card p-4 rounded-xl border border-border text-text"
         />
         <TextInput
           placeholder="Chassi"
-          placeholderTextColor={"#8e8e8e"} 
+          placeholderTextColor={"#8e8e8e"}
           value={chassi}
           onChangeText={setChassi}
           className="bg-card p-4 rounded-xl border border-border text-text"
         />
         <TextInput
           placeholder="Ano de Fabricação"
-          placeholderTextColor={"#8e8e8e"} 
+          placeholderTextColor={"#8e8e8e"}
           value={anoFabricacao}
           onChangeText={setAnoFabricacao}
           keyboardType="numeric"

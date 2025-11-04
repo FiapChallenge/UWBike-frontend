@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useRef, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Patio, getPatios } from "../service/patioService";
 
@@ -8,7 +8,6 @@ type PatioContextType = {
   selecionarPatio: (id: number) => Promise<void>;
   carregarPatios: () => Promise<void>;
   loading: boolean;
-  refreshing: boolean;
 };
 
 const PatioContext = createContext<PatioContextType>({} as PatioContextType);
@@ -17,11 +16,14 @@ export function PatioProvider({ children }: { children: React.ReactNode }) {
   const [patios, setPatios] = useState<Patio[]>([]);
   const [patioAtual, setPatioAtual] = useState<Patio | null>(null);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
+    const isFetching = useRef(false);
 
-  const carregarPatios = async () => {
+  const carregarPatios = useCallback(async () => {
+    if (isFetching.current) return;
+    isFetching.current = true;
+    setLoading(true);
+
     try {
-      setRefreshing(true);
       const lista = await getPatios();
       setPatios(lista);
 
@@ -33,31 +35,9 @@ export function PatioProvider({ children }: { children: React.ReactNode }) {
     } catch (e) {
       console.error("Erro ao carregar pátios:", e);
     } finally {
-      setRefreshing(false);
+      isFetching.current = false;
+      setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const lista = await getPatios();
-        setPatios(lista);
-
-        const saved = await AsyncStorage.getItem("patioAtual");
-        if (saved) {
-          const parsed: Patio = JSON.parse(saved);
-          setPatioAtual(parsed);
-        } else if (lista.length > 0) {
-          setPatioAtual(lista[0]);
-        }
-      } catch (e) {
-        console.error("Erro ao inicializar pátios:", e);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    init();
   }, []);
 
   const selecionarPatio = async (id: number) => {
@@ -69,7 +49,7 @@ export function PatioProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <PatioContext.Provider value={{ patios, patioAtual, selecionarPatio, carregarPatios, loading, refreshing }}>
+    <PatioContext.Provider value={{ patios, patioAtual, selecionarPatio, carregarPatios, loading }}>
       {children}
     </PatioContext.Provider>
   );
