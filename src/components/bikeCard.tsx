@@ -7,10 +7,11 @@ type BikeCardProps = {
   modelo: string
   placa: string,
   chassi: string,
-  anoFabricacao: number
+  anoFabricacao: number,
+  mode?: "edit" | "view";
 };
 
-export default function BikeCard({...item}: BikeCardProps) {
+export default function BikeCard({mode = "edit",...item}: BikeCardProps) {
     const{t} = useTranslation();
 
     const getBikeImage = () => {
@@ -26,10 +27,18 @@ export default function BikeCard({...item}: BikeCardProps) {
 
     const bikeImage = getBikeImage();
 
+    const handlePress = () => {
+        if (mode === "view") {
+        router.push({ pathname: "/location", params: { id: item.id.toString() } });
+        } else {
+        router.push({ pathname: "/editBike", params: { id: item.id.toString() } });
+        }
+    };
+
     return(
         <TouchableOpacity
             className="p-4 mb-2 rounded-lg border border-border flex-row justify-between bg-[#00B030]"
-            onPress={() => router.push(`/editBike?id=${item.id}`)}
+            onPress={handlePress}
         >   
             <View className="gap-2">
                 <Text className="text-white">{t('manageBike.plate')}: {item.placa}</Text>

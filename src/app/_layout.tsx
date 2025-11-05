@@ -19,6 +19,8 @@ export default function Layout() {
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="notifications" options={{ headerShown: false}} />
                 <Stack.Screen name="manageBike" options={{ headerShown: false}} />
+                <Stack.Screen name="localize" options={{ headerShown: false}} />
+                <Stack.Screen name="location" options={{ headerShown: false}} />
                 <Stack.Screen name="addBike" options={{ headerShown: false}} />
                 <Stack.Screen name="editBike" options={{ headerShown: false}} />
                 <Stack.Screen name="changePassword" options={{ headerShown: false}} />

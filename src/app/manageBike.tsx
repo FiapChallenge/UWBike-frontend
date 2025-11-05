@@ -62,7 +62,7 @@ export default function ManageBike() {
                         data={motosExibidas}
                         keyExtractor={(item) => String(item.id)}
                         renderItem={({ item }) => (
-                            <BikeCard {...item} />
+                            <BikeCard {...item} mode="edit"/>
                         )}
                         ListEmptyComponent={() => (
                         <Text className="text-text text-center mt-8">
