@@ -9,6 +9,7 @@ import { usePatio } from "../context/PatioContext";
 import { useTranslation } from "react-i18next";
 import ModelSlider from "../components/modelSlider";
 import { useMotoActions } from "../hooks/useMoto";
+import { notificarMotoEditada } from "../service/notificationService";
 
 export default function EditBike() {
   const { t } = useTranslation();
@@ -105,6 +106,8 @@ export default function EditBike() {
 
       if (!res.ok) throw new Error("Erro ao editar moto");
       Alert.alert("Sucesso", "Moto atualizada com sucesso!");
+
+      await notificarMotoEditada(modelo, placa, patioAtual.nome);
 
       router.back();
     } catch (error) {

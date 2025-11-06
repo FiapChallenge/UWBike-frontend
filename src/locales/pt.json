@@ -63,14 +63,14 @@
   },
    "localize": {
     "title": "Localizar Moto",
-    "noBikes": "No se encontraron motos",
+    "noBikes": "Nenhuma moto encontrada",
     "plate": "Placa",
     "chassi": "Chasis",
     "year": "Año"
   },
    "location": {
     "title": "Detalhes",
-    "noBikes": "No se encontraron motos",
+    "noBikes": "Nenhuma moto encontrada",
     "location": "Localização"
   },
   "editBike": {

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { usePatio } from "../context/PatioContext";
 import { BASE_URL } from "../config/config";
 import ModelSlider from "../components/modelSlider";
+import { notificarMotoAdicionada } from "../service/notificationService";
 
 export default function AddBike() {
   const { theme } = useTheme();
@@ -44,7 +45,10 @@ export default function AddBike() {
     }
 
     if (isNaN(Number(anoFabricacao)) || anoFabricacao.length < 4) {
-      Alert.alert("Validação","Digite um ano de fabricação válido (ex: 2022).");
+      Alert.alert(
+        "Validação",
+        "Digite um ano de fabricação válido (ex: 2022)."
+      );
       return;
     }
 
@@ -65,6 +69,8 @@ export default function AddBike() {
 
       if (!res.ok) throw new Error("Erro ao adicionar moto");
       Alert.alert("Sucesso", "Moto adicionada com sucesso!");
+
+      await notificarMotoAdicionada(modeloSelecionado, placa, patioAtual.nome);
 
       router.back();
     } catch (error) {

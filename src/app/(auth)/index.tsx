@@ -1,6 +1,7 @@
 import { useAuth } from "@/src/context/AuthContext";
+import { pedirPermissaoNotificacoes } from "@/src/service/notificationService";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, View, Text, Image, TextInput, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -30,8 +31,12 @@ export default function Login() {
     } finally {
       setLoading(false);
     }
-  };
+  };  
 
+  useEffect(() => {
+    pedirPermissaoNotificacoes();
+  }, []);
+  
   return (
     <SafeAreaView className="flex-1 bg-background">
         <View className="w-full mt-40 px-4 flex-1 gap-8">
