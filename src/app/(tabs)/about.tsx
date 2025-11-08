@@ -4,7 +4,7 @@ import { Text } from "react-native";
 export default function About(){
     return(
         <SafeAreaView className='flex-1 bg-background items-center justify-center'>
-            <Text className="font-bold text-text text-2xl">Commit Referencia: #128321b</Text>
+            <Text className="font-bold text-text text-2xl">Commit Referencia: #1ab76e4</Text>
         </SafeAreaView>
     )
 }
