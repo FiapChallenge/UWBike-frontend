@@ -97,6 +97,7 @@ export default function AddBike() {
         <ModelSlider onSelect={(nome: string) => setModeloSelecionado(nome)} />
         <TextInput
           placeholder="Placa"
+          maxLength={7}
           placeholderTextColor={"#8e8e8e"}
           value={placa}
           onChangeText={setPlaca}
@@ -105,6 +106,7 @@ export default function AddBike() {
         <TextInput
           placeholder="Chassi"
           placeholderTextColor={"#8e8e8e"}
+          maxLength={17}
           value={chassi}
           onChangeText={setChassi}
           className="bg-card p-4 rounded-xl border border-border text-text"

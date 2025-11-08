@@ -161,6 +161,7 @@ export default function EditBike() {
           <TextInput
             placeholder="Placa"
             placeholderTextColor={"#8e8e8e"}
+            maxLength={7}
             value={placa}
             onChangeText={setPlaca}
             className="bg-card p-4 rounded-xl border border-border text-text"
@@ -168,6 +169,7 @@ export default function EditBike() {
           <TextInput
             placeholder={t("editBike.chassi")}
             placeholderTextColor={"#8e8e8e"}
+            maxLength={17}
             value={chassi}
             onChangeText={setChassi}
             className="bg-card p-4 rounded-xl border border-border text-text"

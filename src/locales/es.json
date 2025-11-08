@@ -81,6 +81,18 @@
     "delete": "Eliminar moto"
   },
   "notifications": {
-    "title": "Notificaciones"
+  "title": "Notificaciones",
+  "all": "Todas",
+  "info": "Información",
+  "alert": "Alertas",
+  "notification1": {
+    "title": "Superpoblación",
+    "body": "La zona B está llena."
+  },
+  "notification2body": "La moto salió del patio.",
+  "notification3body": "La moto entró al patio."
+  },
+  "searchbar": {
+    "title": "Buscar por placa o chasis"
   }
 }

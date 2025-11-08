@@ -84,6 +84,18 @@
     "delete": "Excluir moto"
   },
   "notifications": {
-    "title": "Notificações"
+    "title": "Notificações",
+    "all": "Todas",
+    "info": "Informações",
+    "alert": "Alertas",
+    "notification1": {
+      "title": "Superlotação",
+      "body": "A zona B está cheia."
+    },
+    "notification2body": "A moto saiu do pátio.",
+    "notification3body": "A moto entrou no pátio."
+  },
+  "searchbar": {
+    "title": "Pesquisar por placa ou chassi"
   }
 }

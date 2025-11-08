@@ -3,14 +3,21 @@ import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTheme } from "@/src/context/ThemeProvider";
 import { Feather } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
-const notificationsData = [
+const FILTER_KEY = "@notifications_filter";
+
+export function Notificationlist() {
+  const [filter, setFilter] = useState<"all" | "alert" | "info">("all");
+  const{t} = useTranslation();
+
+  const notificationsData = [
   {
     id: "1",
     icon: "alert-triangle",
-    title: "Superlotação",
+    title:  t('notifications.notification1.title'),
     type: "alert",
-    advice: "A zona B está cheia.",
+    advice: t('notifications.notification1.body'),
     date: "Hoje - 14:40",
   },
   {
@@ -18,7 +25,7 @@ const notificationsData = [
     icon: "info",
     type: "info",
     title: "ABC4321",
-    advice: "A moto saiu do pátio.",
+    advice: t('notifications.notification2body'),
     date: "Hoje - 10:24",
   },
   {
@@ -26,17 +33,12 @@ const notificationsData = [
     icon: "info",
     type: "info",
     title: "ABC1234",
-    advice: "A moto entrou no pátio.",
+    advice: t('notifications.notification3body'),
     date: "Ontem - 20:02",
   },
 ];
 
-const FILTER_KEY = "@notifications_filter";
 
-export function Notificationlist() {
-  const [filter, setFilter] = useState<"all" | "alert" | "info">("all");
-
-  // Carregar filtro salvo
   useEffect(() => {
     const loadFilter = async () => {
       const savedFilter = await AsyncStorage.getItem(FILTER_KEY);
@@ -73,7 +75,7 @@ export function Notificationlist() {
           <Text
             className={`${filter === "all" ? "text-white" : 'text-text'}`}
           >
-            Todos
+            {t('notifications.all')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -85,7 +87,7 @@ export function Notificationlist() {
           <Text
             className={`${filter === "info" ? "text-white" : 'text-text'}`}
           >
-            Informações
+             {t('notifications.info')}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -99,7 +101,7 @@ export function Notificationlist() {
               filter === "alert" ? "text-white" : 'text-text'
             }`}
           >
-            Alertas
+             {t('notifications.alert')}
           </Text>
         </TouchableOpacity>
       </View>

@@ -60,6 +60,7 @@ export default function LocalizeBike() {
         <SearchBar searchTerm={searchTerm} onSearch={setSearchTerm} />
         <View className="mt-4">
           <FlatList
+            className="w-full h-full"
             data={motosExibidas}
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => <BikeCard {...item} mode="view"/>}
@@ -68,6 +69,9 @@ export default function LocalizeBike() {
                 {t("localize.noBikes")}
               </Text>
             )}
+            numColumns={2} 
+            columnWrapperStyle={{ justifyContent: "space-between"}} 
+            contentContainerStyle={{ paddingBottom: 16 }} 
           />
         </View>
       </View>

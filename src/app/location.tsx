@@ -17,8 +17,7 @@ export default function Location() {
   const [modelo, setModelo] = useState("");
   const [placa, setPlaca] = useState("");
   const [carregandoMoto, setCarregandoMoto] = useState(true);
-    const [posicao, setPosicao] = useState({ x: 0, y: 0 });
-
+  const [posicao, setPosicao] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const fetchMoto = async () => {
@@ -45,16 +44,13 @@ export default function Location() {
     };
 
     const gerarLocalizacaoAleatoria = () => {
-        const x = Math.floor(Math.random() * 90) + 5;
-        const y = Math.floor(Math.random() * 90) + 5;
-        setPosicao({ x, y });
-      };
+      const x = Math.floor(Math.random() * 90) + 5;
+      const y = Math.floor(Math.random() * 90) + 5;
+      setPosicao({ x, y });
+    };
     fetchMoto();
     gerarLocalizacaoAleatoria();
   }, [id]);
-
-
-
 
   const getBikeImage = () => {
     switch (modelo) {
@@ -85,37 +81,41 @@ export default function Location() {
       {carregandoMoto ? (
         <Text className="text-text">{t("editBike.loading")}</Text>
       ) : (
-        <View className="">
-          <Text className="text-center text-2xl font-semibold text-text">
-            {modelo} - {placa}
-          </Text>
-          <Image source={bikeImage} className="w-60 h-60 mb-2 self-center" />
-          <View className="gap-2 flex-row items-center mb-4">
-            <Feather name="map-pin" size={18} color={iconColor} />
-            <Text className="text-lg font-semibold text-text">
-                {t("location.location")}
-            </Text>
+        <View className="gap-4">
+          <View className="bg-card border-border border p-4 rounded-xl">
+            <Text className="text-xl text-secondary">{modelo}</Text>
+            <Text className="text-3xl font-bold text-text">{placa}</Text>
+            <Image source={bikeImage} className="w-60 h-60 mb-2 self-center" />
           </View>
-           <View
-            className="w-9/12 bg-card rounded-lg border border-text self-center"
-            style={{
-              aspectRatio: 1, 
-              position: "relative",
-              overflow: "hidden",
-            }}
-          >
+          <View className="bg-card border-border border p-4 rounded-xl">
+            <View className="gap-2 flex-row items-center mb-4">
+              <Text className="text-2xl font-semibold text-text">
+                {t("location.location")}
+              </Text>
+            </View>
             <View
+              className="w-9/12 bg-background rounded-lg border border-border"
               style={{
-                position: "absolute",
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                backgroundColor: "#00B030",
-                left: `${posicao.x}%`,
-                top: `${posicao.y}%`,
-                transform: [{ translateX: -8 }, { translateY: -8 }],
+                aspectRatio: 1,
+                position: "relative",
+                overflow: "hidden",
               }}
-            />
+            >
+              <View
+                style={{
+                  position: "absolute",
+                  width: 16,
+                  height: 16,
+                  borderRadius: 8,
+                  backgroundColor: "#62E085",
+                  borderColor: "#00B030",
+                  borderWidth: 3,
+                  left: `${posicao.x}%`,
+                  top: `${posicao.y}%`,
+                  transform: [{ translateX: -8 }, { translateY: -8 }],
+                }}
+              />
+            </View>
           </View>
         </View>
       )}

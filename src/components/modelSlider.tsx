@@ -1,9 +1,9 @@
-import { View, Text, FlatList, Image, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
 import { useState, useEffect } from "react";
 
 const { width } = Dimensions.get("window");
-const SLIDE_WIDTH = width * 0.5;
-const ITEM_SPACING = 16;
+const ITEM_SPACING = 12;
+const CARD_WIDTH = (width - ITEM_SPACING * 4) / 3; 
 
 const motos = [
   { id: 1, nome: "Mottu-E", imagem: require("../../assets/images/mottue.png") },
@@ -27,47 +27,40 @@ export default function ModelSlider({ onSelect, selectedValue }: any) {
   };
 
   return (
-    <View style={{ marginVertical: 20 }}>
-      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 16 }} className="text-text">
-        Escolha o modelo:
-      </Text>
-      <FlatList
-        data={motos}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        snapToInterval={SLIDE_WIDTH + ITEM_SPACING}
-        decelerationRate="fast"
-        contentContainerStyle={{ paddingHorizontal: (width - SLIDE_WIDTH) / 2 }}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => {
-          const isSelected = item.id === selectedId;
-          return (
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => handleSelect(item)}
+    <View className="mt-5 mb-5 flex-row gap-2">
+      {motos.map((item) => {
+        const isSelected = item.id === selectedId;
+        return (
+          <TouchableOpacity
+            key={item.id}
+            activeOpacity={0.8}
+            onPress={() => handleSelect(item)}
+            style={{
+              width: CARD_WIDTH,
+              backgroundColor: isSelected ? "#00B030" : "transparent",
+              borderRadius: 12,
+              padding: 8,
+            }}
+          >
+            <Image
+              source={item.imagem}
               style={{
-                width: SLIDE_WIDTH,
-                marginHorizontal: ITEM_SPACING / 2,
-                borderWidth: isSelected ? 2 : 0,
-                borderColor: isSelected ? "#00B030" : "transparent",
+                width: "100%",
+                height: 110,
                 borderRadius: 12,
-                padding: 10,
+                resizeMode: "cover",
               }}
+            />
+            <Text
+              className={`text-center mt-2 ${
+                isSelected ? "font-bold text-white" : "text-text"
+              }`}
             >
-              <Image
-                source={item.imagem}
-                style={{ width: "100%", height: 180, borderRadius: 12, resizeMode: "cover" }}
-              />
-              <Text
-                style={{ textAlign: "center", marginTop: 6, fontWeight: isSelected ? "bold" : "normal" }}
-                className="text-text"
-              >
-                {item.nome}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-      />
+              {item.nome}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
     </View>
   );
 }
