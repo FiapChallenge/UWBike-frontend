@@ -1,9 +1,9 @@
 import * as Notifications from 'expo-notifications';
 import * as Device from "expo-device";
+import { Platform } from 'react-native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
     shouldShowBanner: true,
     shouldShowList: true,
     shouldPlaySound: true,
@@ -11,37 +11,67 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export async function pedirPermissaoNotificacoes() {
-  if (!Device.isDevice) return false;
+export async function pedirPermissaoNotificacoes(): Promise<boolean> {
+  try{
+    if (!Device.isDevice) {
+			console.warn("Notificações só funcionam em dispositivos físicos");
+			return false;
+		}
+  
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+  
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+  
+    if (finalStatus !== "granted") {
+			console.warn("Permissão de notificação negada");
+			return false;
+		}
+    if (Platform.OS === "android") {
+			await Notifications.setNotificationChannelAsync("tasks", {
+				name: "Lembretes de Tarefas",
+				importance: Notifications.AndroidImportance.HIGH,
+				vibrationPattern: [0, 250, 250, 250],
+				lightColor: "#FF231F7C",
+				sound: "default",
+			});
+		}
 
-  const { status: existingStatus } = await Notifications.getPermissionsAsync();
-  let finalStatus = existingStatus;
-
-  if (existingStatus !== 'granted') {
-    const { status } = await Notifications.requestPermissionsAsync();
-    finalStatus = status;
+    return true;
+  }catch(e){
+    console.error("Erro ao configurar notificação:", e);
+    return false;
   }
-
-  return finalStatus === 'granted';
 }
 
-export async function notificarMotoAdicionada(modelo: string, placa: string, patio: string) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "✅ Nova moto adicionada",
-      body: `${modelo} - ${placa} foi adicionada ao pátio ${patio}`,
-      sound: true,
-    },
-    trigger: null,
-  });
+export async function notificarMotoAdicionada(modelo: string, placa: string, patio: string): Promise<void> {
+  try{
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "✅ Nova moto adicionada",
+        body: `${modelo} - ${placa} foi adicionada ao pátio ${patio}`,
+        sound: true,
+      },
+      trigger: null,
+    });
+  }catch(e){
+    console.error("Erro ao notificar moto adicionada:", e);
+  }
 }
-export async function notificarMotoEditada(modelo: string, placa: string, patio: string) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "✅ Moto editada",
-      body: `${modelo} - ${placa} foi editada no pátio ${patio}`,
-      sound: true,
-    },
-    trigger: null,
-  });
+export async function notificarMotoEditada(modelo: string, placa: string, patio: string) : Promise<void> {
+  try{
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title: "✅ Moto editada",
+        body: `${modelo} - ${placa} foi editada no pátio ${patio}`,
+        sound: true,
+      },
+      trigger: null,
+    });
+  }catch(e){
+    console.error("Erro ao notificar moto editada:", e);
+  }
 }
