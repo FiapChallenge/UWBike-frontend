@@ -13,6 +13,7 @@ Notifications.setNotificationHandler({
 
 export async function pedirPermissaoNotificacoes(): Promise<boolean> {
   try{
+    console.log("Device.isDevice:", Device.isDevice);
     if (!Device.isDevice) {
 			console.warn("Notificações só funcionam em dispositivos físicos");
 			return false;
@@ -35,7 +36,7 @@ export async function pedirPermissaoNotificacoes(): Promise<boolean> {
 				name: "Lembretes de Tarefas",
 				importance: Notifications.AndroidImportance.HIGH,
 				vibrationPattern: [0, 250, 250, 250],
-				lightColor: "#FF231F7C",
+				lightColor: "#00B030",
 				sound: "default",
 			});
 		}
@@ -54,8 +55,16 @@ export async function notificarMotoAdicionada(modelo: string, placa: string, pat
         title: "✅ Nova moto adicionada",
         body: `${modelo} - ${placa} foi adicionada ao pátio ${patio}`,
         sound: true,
+        priority: Notifications.AndroidNotificationPriority.HIGH,
+        ...(Platform.OS === "android" && {
+          channelId: "default",
+        }),
       },
-      trigger: null,
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: 1,
+        repeats: false,
+      },
     });
   }catch(e){
     console.error("Erro ao notificar moto adicionada:", e);
@@ -65,11 +74,19 @@ export async function notificarMotoEditada(modelo: string, placa: string, patio:
   try{
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: "✅ Moto editada",
+        title: "✏️ Moto editada",
         body: `${modelo} - ${placa} foi editada no pátio ${patio}`,
         sound: true,
+        priority: Notifications.AndroidNotificationPriority.HIGH,
+        ...(Platform.OS === "android" && {
+          channelId: "default",
+        }),
       },
-      trigger: null,
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: 1,
+        repeats: false,
+      },
     });
   }catch(e){
     console.error("Erro ao notificar moto editada:", e);

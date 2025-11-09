@@ -3,7 +3,7 @@ import { pedirPermissaoNotificacoes } from "@/src/service/notificationService";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, View, Text, Image, TextInput, ActivityIndicator } from "react-native";
+import { Pressable, View, Text, Image, TextInput, ActivityIndicator, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Login() {
@@ -33,8 +33,22 @@ export default function Login() {
     }
   };  
 
+  
   useEffect(() => {
-    pedirPermissaoNotificacoes();
+    const setupNotifications = async () => {
+      console.log("🔔 Iniciando configuração de notificações...");
+      const granted = await pedirPermissaoNotificacoes();
+      
+      if (granted) {
+        console.log("✅ Permissão de notificação concedida!");
+        Alert.alert("Sucesso", "Notificações configuradas com sucesso!");
+      } else {
+        console.log("❌ Permissão de notificação negada!");
+        Alert.alert("Aviso", "Notificações não foram autorizadas. Você não receberá alertas.");
+      }
+    };
+
+    setupNotifications();
   }, []);
   
   return (
